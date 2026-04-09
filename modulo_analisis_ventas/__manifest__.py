@@ -17,10 +17,6 @@ Módulo básico para consultas e informes de análisis de ventas, incluyendo el 
         'report/sale_report_views.xml',
         'report/sale_report_templates.xml',
     ],
-    'demo': [
-        'data/product_demo.xml',
-        'data/sale_demo.xml',
-    ],
     'installable': True,
     'application': False,    
 }
