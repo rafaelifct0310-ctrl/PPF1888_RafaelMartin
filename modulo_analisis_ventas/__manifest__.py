@@ -1,5 +1,4 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 {
     'name': 'Analisis de Ventas PPF1888',
     'version': '19.0.1.0.0',
