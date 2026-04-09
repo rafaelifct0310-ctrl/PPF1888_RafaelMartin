@@ -65,3 +65,4 @@ WHERE so.state IN ('sale', 'done')
 ORDER BY
     so.date_order DESC;
 
+
