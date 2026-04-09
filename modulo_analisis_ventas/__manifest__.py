@@ -22,8 +22,7 @@ Módulo básico para consultas e informes de análisis de ventas, incluyendo el 
         'data/sale_demo.xml',
     ],
     'installable': True,
-    'application': False,
-     
+    'application': False,    
 }
     
     
