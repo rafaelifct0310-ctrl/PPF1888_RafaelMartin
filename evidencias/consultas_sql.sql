@@ -65,4 +65,17 @@ WHERE so.state IN ('sale', 'done')
 ORDER BY
     so.date_order DESC;
 
-
+-- ===============================================
+-- Consulta 4: Ventas por fechas
+-- ===============================================
+SELECT
+    DATE(so.date_order) AS Fecha,
+    COUNT(so.id) AS Numero_pedidos,
+    SUM(so.amount_total) AS Total_ventas
+FROM
+    sale_order so
+WHERE so.state IN ('sale', 'done')
+GROUP BY
+    DATE(so.date_order)
+ORDER BY
+    Fecha DESC;
