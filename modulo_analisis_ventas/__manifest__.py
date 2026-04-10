@@ -9,7 +9,7 @@ Módulo básico para consultas e informes de análisis de ventas, incluyendo el 
     """,
     'author': 'Rafael Martín',
     'license': 'LGPL-3',
-    'depends': ['sales'],
+    'depends': ['sale'],
     'data': [
         'security/ir.model.access.csv',
         'views/sale_report_views.xml',
