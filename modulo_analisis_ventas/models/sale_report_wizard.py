@@ -37,4 +37,32 @@ class SaleReportWizard(models.TransientModel):
         
         return self.env.ref('modulo_analisis_ventas.action_sale_report_pdf').report_action(self)
     
-    
+    # metodo para obtener los datos de las ventas según el dominio
+    def get_report_lines(self):
+        # obtenemos el dominio de búsqueda
+        domain = self._get_domain()
+        
+        # buscamos en el modelo sale.order las ventas que cumplen con el dominio
+        sales = self.env['sale.order'].search(domain, order='date_order desc')
+
+        # crear una lista de diccionarios con los datos que queremos mostrar en el informe
+        lines = []
+
+        for sale in sales:
+            # dentro de cada pedido de venta, recorremos las líneas para obtener los detalles de cada producto vendido
+            for line in sale.order_line:
+                lines.append({
+                    'pedido': sale.name,
+                    'fecha': sale.date_order,
+                    'cliente': sale.partner_id.name,
+                    'producto': line.product_id.name,
+                    'cantidad': line.product_uom_qty,
+                    'precio_unitario': line.price_unit,
+                    'subtotal': line.price_subtotal,
+            })
+        
+        # Devolvemos la lista completa
+        return lines
+            
+
+
