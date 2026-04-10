@@ -69,9 +69,8 @@ class SaleReportWizard(models.TransientModel):
         total = 0.0
 
         # recorremos las líneas del informe para sumar el subtotal de cada línea
-        for line in self.get_report_lines():
-            # vamos sumando el subtotal de cada línea
-            total += line['subtotal']
+        lines = self.get_report_lines()
+        total = sum(line['subtotal'] for line in lines)
         
         # devolvemos el total general de ventas
         return total
