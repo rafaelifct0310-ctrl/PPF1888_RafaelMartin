@@ -30,4 +30,11 @@ class SaleReportWizard(models.TransientModel):
         # devolvemos el dominio completo para la búsqueda de las ventas
         return domain
     
+    # Método para generar el informe de ventas
+    def action_print_report(self):
+        # aquí localizamos la accion del informe definida en XML
+        # modulo_analisis_ventas.action_sale_report_pdf
+        
+        return self.env.ref('modulo_analisis_ventas.action_sale_report_pdf').report_action(self)
+    
     
