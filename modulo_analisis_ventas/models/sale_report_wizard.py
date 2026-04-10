@@ -1,0 +1,33 @@
+from odoo import api, fields, models
+
+class SaleReportWizard(models.TransientModel):
+    _name = 'sale.report.wizard'
+    _description = 'Asistente de informe de ventas'
+
+    # campos para filtrar el informe fecha incio, fecha fin, cliente
+    date_from = fields.Date(string='Fecha desde', required=True)
+    date_to = fields.Date(string='Fecha hasta', required=True)
+
+    partner_id = fields.Many2one('res.partner', string='Cliente')
+
+    # Método para obtener el dominio de búsqueda de las ventas
+    def _get_domain(self):
+        # filtro base para obtener solo las ventas confirmadas o realizadas
+        domain = [('state', 'in', ['sale', 'done'])]
+        
+        
+        # agregar filtro de fecha
+        if self.date_from:
+            domain.append(('date_order', '>=', self.date_from))
+
+        if self.date_to:
+            domain.append(('date_order', '<=', self.date_to))
+        
+        # agregar filtro de cliente
+        if self.partner_id:
+            domain.append(('partner_id', '=', self.partner_id.id))
+        
+        # devolvemos el dominio completo para la búsqueda de las ventas
+        return domain
+    
+    
