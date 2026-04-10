@@ -63,6 +63,6 @@ class SaleReportWizard(models.TransientModel):
         
         # Devolvemos la lista completa
         return lines
-            
+                
 
 
