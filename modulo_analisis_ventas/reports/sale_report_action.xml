@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_sale_report_pdf" model="ir.action.report">
+        <field name="name">Informe de ventas</field>
+        <field name="res_model">sale.report.wizard</field>
+        <field name="report-type">qweb-pdf</field>
+        <field name="report_name">modulo_analisis_ventas.sale_report_template</field>
+        <field name="report_file">modulo_analisis_ventas/sale_report_pdf_template.xml</field>
+        <field name="print_report_name">Informe de ventas</field>
+    </record>
+</odoo>
