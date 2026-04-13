@@ -14,7 +14,7 @@ Módulo básico para consultas e informes de análisis de ventas, incluyendo el 
         'security/ir.model.access.csv',
         'views/sale_report_views.xml',
         'reports/sale_report_action.xml',
-        'reports/sale_report_templates.xml',
+        'reports/sale_report_template.xml',
     ],
     'installable': True,
     'application': False,    

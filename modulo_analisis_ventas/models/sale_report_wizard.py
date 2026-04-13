@@ -35,7 +35,13 @@ class SaleReportWizard(models.TransientModel):
         # aquí localizamos la accion del informe definida en XML
         # modulo_analisis_ventas.action_sale_report_pdf
         
-        return self.env.ref('modulo_analisis_ventas.action_sale_report_pdf').report_action(self)
+        return self.env.ref('modulo_analisis_ventas.action_sale_report_pdf').report_action(self, data={
+        'date_from': str(self.date_from) if self.date_from else False,
+        'date_to': str(self.date_to) if self.date_to else False,
+        'partner_name': self.partner_id.name if self.partner_id else False,
+        'lines': self.get_report_lines(),
+        'total': self.get_total_general(),
+    })
     
     # metodo para obtener los datos de las ventas según el dominio
     def get_report_lines(self):
@@ -53,7 +59,7 @@ class SaleReportWizard(models.TransientModel):
             for line in sale.order_line:
                 lines.append({
                     'pedido': sale.name,
-                    'fecha': sale.date_order,
+                    'fecha': str(sale.date_order),
                     'cliente': sale.partner_id.name,
                     'producto': line.product_id.name,
                     'cantidad': line.product_uom_qty,
