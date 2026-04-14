@@ -30,18 +30,15 @@ class SaleReportWizard(models.TransientModel):
         # devolvemos el dominio completo para la búsqueda de las ventas
         return domain
     
+
     # Método para generar el informe de ventas
     def action_print_report(self):
-        # aquí localizamos la accion del informe definida en XML
-        # modulo_analisis_ventas.action_sale_report_pdf
+        # Nos aseguramos de que el registro esté guardado en la DB temporal
+        self.ensure_one()
         
-        return self.env.ref('modulo_analisis_ventas.action_sale_report_pdf').report_action(self, data={
-        'date_from': str(self.date_from) if self.date_from else False,
-        'date_to': str(self.date_to) if self.date_to else False,
-        'partner_name': self.partner_id.name if self.partner_id else False,
-        'lines': self.get_report_lines(),
-        'total': self.get_total_general(),
-    })
+        # Simplemente pasamos 'self'. Odoo usará este objeto como 'doc' en el XML.
+        # No pases el diccionario 'data' a menos que uses un Report AbstractModel.
+        return self.env.ref('modulo_analisis_ventas.action_sale_report_pdf').report_action(self)
     
     # metodo para obtener los datos de las ventas según el dominio
     def get_report_lines(self):
